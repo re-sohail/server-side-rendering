@@ -6,6 +6,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from "react-router";
+
 import "./app.css";
 
 export function links() {
@@ -45,7 +46,9 @@ export default function App() {
   return <Outlet />;
 }
 
-/** @param {ErrorBoundaryProps} param0 */
+/**
+ * ErrorBoundary component to handle errors in the application.
+ */
 export function ErrorBoundary({ error }) {
   let message = "Oops!";
   let details = "An unexpected error occurred.";
