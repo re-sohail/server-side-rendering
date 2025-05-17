@@ -12,6 +12,28 @@ import "./app.css";
 // Main layout component
 import MainLayout from "./layouts/MainLayout/MainLayout";
 
+// Tanstack imports
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
+const queryClient = new QueryClient({
+  queries: {
+    retry: 2,
+    staleTime: 1000 * 60 * 5,
+    refetchOnWindowFocus: false,
+  },
+  mutations: {
+    retry: 0,
+  },
+});
+
+// Links
 export function links() {
   return [
     { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -48,7 +70,10 @@ export function Layout({ children }) {
 export default function App() {
   return (
     <MainLayout>
-      <Outlet />;
+      <QueryClientProvider client={queryClient}>
+        <Outlet />;
+        {import.meta.env.DEV && <ReactQueryDevtools initialIsOpen={false} />}
+      </QueryClientProvider>
     </MainLayout>
   );
 }
