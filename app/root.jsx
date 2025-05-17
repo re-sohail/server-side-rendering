@@ -9,6 +9,9 @@ import {
 
 import "./app.css";
 
+// Main layout component
+import MainLayout from "./layouts/MainLayout/MainLayout";
+
 export function links() {
   return [
     { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -43,7 +46,11 @@ export function Layout({ children }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+    <MainLayout>
+      <Outlet />;
+    </MainLayout>
+  );
 }
 
 /**
